@@ -457,6 +457,7 @@ paging, so the arrows stay put instead of jumping when a shorter page comes up.
 | **Show excerpt** | Display text excerpt | Enabled |
 | **Show source** | Display the source/feed name | Disabled |
 | **Open links in new tab** | Links open in a new browser tab | Enabled |
+| **Go straight to the source instead of a preview** | Connection sources only (Jira, Confluence, custom REST, …): clicking an item opens its link instead of the article popup. RSS always opens the popup. Items without a link always open the popup | Enabled for new widgets; widgets created before this option keep the popup |
 
 ## Personalized LMS Content
 

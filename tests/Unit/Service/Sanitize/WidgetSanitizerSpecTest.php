@@ -377,6 +377,24 @@ class WidgetSanitizerSpecTest extends TestCase {
 		$this->assertFalse($uit['showTitle'], 'an explicit false must survive the sanitizer');
 	}
 
+	/**
+	 * itemClick was added after feed widgets were already in the wild. Those
+	 * widgets opened every item in the popup, so a stored widget without the
+	 * key must keep doing that rather than start leaving the page on click.
+	 */
+	public function testFeedItemClickDefaultsToPreviewForWidgetsSavedBeforeTheOption(): void {
+		$zonderSleutel = $this->sanitizer->sanitizeWidget(['type' => 'feed']);
+		$this->assertSame('preview', $zonderSleutel['itemClick']);
+
+		$bron = $this->sanitizer->sanitizeWidget(['type' => 'feed', 'itemClick' => 'source']);
+		$this->assertSame('source', $bron['itemClick'], 'an explicit choice must survive the allowlist');
+
+		foreach (['evil', '', null, true, []] as $rommel) {
+			$result = $this->sanitizer->sanitizeWidget(['type' => 'feed', 'itemClick' => $rommel]);
+			$this->assertSame('preview', $result['itemClick']);
+		}
+	}
+
 	public function testPhotoStoryKeepsOnlyItsConfig(): void {
 		$result = $this->sanitizer->sanitizeWidget([
 			'type' => 'photo-story',

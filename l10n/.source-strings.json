@@ -1,6 +1,6 @@
 {
-    "count": 1572,
-    "sha256": "4964199a337ac670572a5a7e1f446f04349db28f805ac384e8420594ce69a8ff",
+    "count": 1573,
+    "sha256": "a455f8dcd31185c5cf4c47b5c3bc886d57bf6a3dfc8eb09e303e3003e4e5b99f",
     "strings": [
         "— Not configured —",
         "… and {n} more",
@@ -590,6 +590,7 @@
         "Get started quickly with example pages in multiple languages (Dutch, English, German, French).",
         "Globe",
         "Glossy editorial (serif)",
+        "Go straight to the source instead of a preview",
         "Go to Administration settings",
         "Go to maintenance",
         "Go to slide {number}",
