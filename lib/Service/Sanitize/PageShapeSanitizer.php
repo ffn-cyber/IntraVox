@@ -979,6 +979,10 @@ final class PageShapeSanitizer {
                 $sanitized['showSource'] = (bool) ($widget['showSource'] ?? false);
                 $sanitized['excerptLength'] = max(50, min((int) ($widget['excerptLength'] ?? 150), 500));
                 $sanitized['openInNewTab'] = (bool) ($widget['openInNewTab'] ?? true);
+                // What a click on a connection item does. Absent means
+                // 'preview': every widget saved before this option existed
+                // opened the popup, and must keep doing so.
+                $sanitized['itemClick'] = ($widget['itemClick'] ?? 'preview') === 'source' ? 'source' : 'preview';
 
                 // Sort and filter
                 $sanitized['sortBy'] = in_array($widget['sortBy'] ?? 'date', ['date', 'title'], true) ? ($widget['sortBy'] ?? 'date') : 'date';

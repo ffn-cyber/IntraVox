@@ -11,6 +11,7 @@
       :show-source="widget.showSource || false"
       :excerpt-length="widget.excerptLength || 150"
       :open-in-new-tab="widget.openInNewTab !== false"
+      :follow-link="widget.itemClick === 'source'"
       :item-background="itemBackgroundMode"
       :feed-image="feedImage"
       :compact="true"

@@ -423,6 +423,13 @@
           <NcCheckboxRadioSwitch :model-value="localWidget.openInNewTab" @update:model-value="v => { localWidget.openInNewTab = v; emitUpdate(); }">
             {{ t('intravox', 'Open links in new tab') }}
           </NcCheckboxRadioSwitch>
+          <!-- RSS always opens the popup: it carries the article to show. -->
+          <NcCheckboxRadioSwitch
+            v-if="localWidget.sourceType !== 'rss'"
+            :model-value="localWidget.itemClick === 'source'"
+            @update:model-value="v => { localWidget.itemClick = v ? 'source' : 'preview'; emitUpdate(); }">
+            {{ t('intravox', 'Go straight to the source instead of a preview') }}
+          </NcCheckboxRadioSwitch>
         </div>
       </div>
     </div>
@@ -742,6 +749,10 @@ export default {
         showSource: false,
         excerptLength: 150,
         openInNewTab: true,
+        // itemClick is deliberately absent. These defaults are merged under
+        // every widget the editor opens, so a value here would flip an
+        // existing widget to it on its next save. New widgets get 'source'
+        // from PageEditor; a widget without the key reads as 'preview'.
         sortBy: 'date',
         sortOrder: 'desc',
         filterKeyword: '',

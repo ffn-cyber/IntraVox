@@ -173,6 +173,12 @@ export default {
       type: Boolean,
       default: true,
     },
+    // Connection items go straight to their URL instead of the popup.
+    // Ignored for RSS, which has an article to show.
+    followLink: {
+      type: Boolean,
+      default: false,
+    },
     itemBackground: {
       type: String,
       default: 'default',
@@ -197,9 +203,20 @@ export default {
      * any link — a new tab or window. Swallowing those would break an
      * expectation people carry to every link on the web, and the href stays on
      * the element so the browser can honour them.
+     *
+     * Connection items (Talk, Jira, a custom REST API, …) can follow their
+     * link instead, when the widget says so (followLink). Only RSS carries a
+     * body to open, so for them the popup can only repeat the excerpt and put
+     * the real destination one click further away. It is a widget setting
+     * rather than a fixed rule because some readers do want to skim a Jira
+     * description without leaving the page — and because widgets saved before
+     * the setting existed opened the popup, and must keep doing so.
      */
     onClick(event) {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+        return;
+      }
+      if (this.followLink && this.item.url && this.item.connectionType && this.item.connectionType !== 'rss') {
         return;
       }
       event.preventDefault();
